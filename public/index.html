@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>¿Llueve? · Valle de Aburrá</title>
+  <meta name="theme-color" content="#0b0e13">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 3C16 3 6 15 6 21a10 10 0 0 0 20 0C26 15 16 3 16 3z' fill='%234ea3ff'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="app.css?v=6">
+</head>
+<body>
+  <aside class="panel">
+    <header class="marca">
+      <span class="gota" aria-hidden="true"></span>
+      <span>¿Llueve?</span>
+      <span class="marca-sub">Valle de Aburrá</span>
+    </header>
+
+    <nav class="pestanas" role="tablist">
+      <button role="tab" class="pestana activa" data-vista="ahora" aria-selected="true">Lluvia</button>
+      <button role="tab" class="pestana" data-vista="pronostico" aria-selected="false">Pronóstico</button>
+    </nav>
+
+    <!-- Vista: lluvia -->
+    <section class="vista activa" id="vista-ahora">
+      <h1 class="titular" id="titular">Cargando la lluvia…</h1>
+      <p class="bajada" id="bajada"></p>
+      <ul class="municipios" id="municipios"></ul>
+
+      <div class="bloque">
+        <p class="bloque-titulo">Ver la lluvia de</p>
+        <div class="periodos" id="periodos">
+          <button data-p="m30" class="activo">Ahora</button>
+          <button data-p="h1">1 hora</button>
+          <button data-p="h24">24 horas</button>
+          <button data-p="h72">3 días</button>
+          <button data-p="d30">30 días</button>
+        </div>
+        <p class="periodo-ayuda" id="periodo-ayuda"></p>
+      </div>
+
+      <div class="bloque">
+        <p class="bloque-titulo" id="top-titulo">Donde más llueve</p>
+        <ol class="top" id="top"></ol>
+      </div>
+
+      <p class="actualizado" id="actualizado"></p>
+    </section>
+
+    <!-- Vista: pronóstico -->
+    <section class="vista" id="vista-pronostico">
+      <h1 class="titular chico" id="pron-titular">Cargando pronóstico…</h1>
+      <div class="dias" id="dias">
+        <button data-d="0" class="activo">Hoy</button>
+        <button data-d="1">Mañana</button>
+      </div>
+      <div class="franjas-cabeza">
+        <span></span><span>Madrug.</span><span>Mañana</span><span>Tarde</span><span>Noche</span><span>°C</span>
+      </div>
+      <ul class="zonas" id="zonas"></ul>
+      <div class="leyenda-pron">
+        <span><i class="p-BAJA"></i>Poco probable</span>
+        <span><i class="p-MEDIA"></i>Puede llover</span>
+        <span><i class="p-ALTA"></i>Muy probable</span>
+      </div>
+      <p class="actualizado" id="pron-actualizado"></p>
+    </section>
+
+    <footer class="pie">Datos: SIATA – Área Metropolitana del Valle de Aburrá · Marinilla: Open-Meteo</footer>
+  </aside>
+
+  <main class="mapa-caja">
+    <div id="mapa"></div>
+
+    <div class="mapa-botones">
+      <button class="boton" id="btn-radar" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12 19 6"/></svg>
+        Radar
+      </button>
+      <button class="boton" id="btn-cerca">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+        Cerca de mí
+      </button>
+    </div>
+
+    <div class="radar-control" id="radar-control" hidden>
+      <button class="play" id="radar-play" aria-label="Pausar">❚❚</button>
+      <input type="range" id="radar-barra" min="0" max="0" value="0" aria-label="Momento del radar">
+      <span class="radar-hora" id="radar-hora">--:--</span>
+      <div class="radar-escala">Débil <i></i> Fuerte</div>
+    </div>
+
+    <div class="leyenda" id="leyenda"></div>
+
+    <div class="aviso" id="aviso" hidden></div>
+
+    <article class="tarjeta" id="tarjeta" hidden>
+      <button class="cerrar" id="tarjeta-cerrar" aria-label="Cerrar">×</button>
+      <div id="tarjeta-cuerpo"></div>
+    </article>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="app.js?v=6"></script>
+</body>
+</html>
