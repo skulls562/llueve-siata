@@ -38,3 +38,7 @@ Los datos pertenecen a sus proveedores originales. Este proyecto no está afilia
 
 [MIT](LICENSE).
 
+
+---
+
+**Built by [Jerónimo Montoya](https://github.com/skulls562)**, co-founder of [DAZERIT](https://dazerit.com). I build AI-powered websites, dashboards and automations. Need something like this for your business or city? Write to **jero@dazerit.com**.
